@@ -1,0 +1,10 @@
+#cloud-config
+snap:
+    commands: 
+        00: snap install docker
+
+runcmd: 
+    - sudo systemctl enable docker
+    - sudo chmod 777 /var/run/docker.sock 
+    
+final_message: "The system is finally up, after $UPTIME seconds"

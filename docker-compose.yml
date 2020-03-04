@@ -1,0 +1,47 @@
+version: "3"
+services: 
+    vote: 
+        image: bretfisher/examplevotingapp_vote
+        networks: 
+            - front
+        deploy:
+            replicas: 2
+        ports: 
+            - "80:80"
+    redis:
+        image: redis:3.2
+        networks: 
+            - front
+        deploy:
+            replicas: 1
+        ports : ["6379"]
+    worker:
+        image: bretfisher/examplevotingapp_worker:java
+        networks: 
+            - back
+            - front
+        deploy:
+            replicas: 1
+    db:
+        image: postgres:9.4
+        volumes:
+            - "db-data:/var/lib/postgresql/data"
+        environment: 
+            - POSTGRES_HOST_AUTH_METHOD=trust #allow all connections without a password, not recommended!! 
+        networks: 
+            - back
+        deploy:
+            replicas: 1
+    result:
+        image: bretfisher/examplevotingapp_result
+        networks: 
+            - back
+        deploy:
+            replicas: 1
+        ports:
+            - "5001:80"
+networks:
+    front:
+    back:
+volumes:
+    db-data:
