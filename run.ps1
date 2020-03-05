@@ -11,6 +11,8 @@ multipass exec ubuntu-mpass3 -- sudo docker swarm join --token SWMTKN-1-0lt4v1zc
 
 multipass exec ubuntu-mpass1 -- sudo docker stack deploy --compose-file /home/ubuntu/D:/Projects/docker/myfiles/swarm/docker-compose.yml voteapp
 
+multipass exec ubuntu-mpass1 -- sudo docker service create --name viz -p 8080:8080 --constraint=node.role==manager --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock dockersamples/visualizer
+
 # /var/snap/docker/current/config/daemon.json
 # sudo snap restart docker
 
