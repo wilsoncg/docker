@@ -13,3 +13,11 @@ multipass exec ubuntu-mpass1 -- sudo docker stack deploy --compose-file /home/ub
 
 # /var/snap/docker/current/config/daemon.json
 # sudo snap restart docker
+
+# To stop & uninstall snap docker
+# sudo snap stop docker
+# sudo snap remove docker
+
+# Troubleshoot cloud-init
+# cat /var/log/cloud-init.log
+# /var/lib/cloud/instance/scripts/runcmd
